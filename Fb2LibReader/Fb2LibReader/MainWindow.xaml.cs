@@ -32,8 +32,13 @@ namespace Fb2LibReader
         }
 
 
-        private void TextBlock_leftButton(object sender, RoutedEventArgs e)
+        private async void TextBlock_leftButton(object sender, RoutedEventArgs e)
         {
+            if (Interaction.Book == null)
+            {
+                await Interaction.OpenBook();
+            }
+
             textBlock.Text += Interaction.GetPage(Interaction.Book, 0, 3);
         }
 
