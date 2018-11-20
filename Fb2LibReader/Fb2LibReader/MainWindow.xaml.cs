@@ -37,9 +37,15 @@ namespace Fb2LibReader
             if (Interaction.Book == null)
             {
                 await Interaction.OpenBook();
+                Interaction.BookToList(Interaction.Book);
             }
 
-            textBlock.Text += Interaction.GetPage(Interaction.Book, 0, 3);
+            
+            while (textBlock.IsLoaded)
+            {
+                textBlock.Text += Interaction.ReadBook(Interaction.Book, true);
+            }
+            
         }
 
     }

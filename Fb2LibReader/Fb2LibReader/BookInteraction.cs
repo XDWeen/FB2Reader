@@ -11,6 +11,7 @@ using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using Microsoft.Win32;
 
+
 namespace Fb2LibReader
 {
     public class BookInteraction
@@ -19,7 +20,13 @@ namespace Fb2LibReader
         public FB2File Book;
         private List<string> BookText = new List<string>();
         private byte[] Images;
+        private int Position = 0;
 
+
+
+
+
+ 
      
         protected virtual void PrepareTextItems(IEnumerable<IFb2TextItem> textItems)
         {
@@ -117,8 +124,8 @@ namespace Fb2LibReader
 
 
 
-        //add all book's content to Dictionary
-        protected void BookToDictionary(FB2File file)
+        //add all book's content to List
+        public void BookToList(FB2File file)
         {
             int sectionsCount = 0;
             Book = file;
@@ -137,24 +144,44 @@ namespace Fb2LibReader
 
 
         //make book to read
-        protected void ReadBook(FB2File file, int skip, int take)
+        public string ReadBook(FB2File file, bool isTextBlockLoaded)
         {
-            BookToDictionary(file);
-            var dictionaryDop = BookText.Skip(skip);
-            BookText = dictionaryDop.Take(take).ToList();
+            
+            
+            var listDop = BookText.Skip(Position);
+            //listDop = listDop.Take(take);
+            //listDop.TakeWhile(p => main.textBlock.IsLoaded);
+
+
+                
+            Position++;
+            return listDop.ElementAt(Position); ;
+            
+            
         }
 
         //Return book's page to place on textblock
-        public string GetPage(FB2File file, int skip, int take)
+        public void GetPage(FB2File file, int skip, int take)
         {
+            //ReadBook(file, skip, take);
+
+           // var dop = ReadBook(file, skip, take);
+           // dop.ElementAt(1);
+
+            //while(main.textBlock) 
+
+
             
-            ReadBook(file, skip, take);
-            var page = "";
-            foreach (var str in BookText)
-            {
-                page += str;
-            }
-            return page;
+
+            //var page = "";
+            //foreach (var str in ReadBook(file, skip, take))
+            // {
+            //    page += str;
+            //var dop = ReadBook(file, skip, take);
+            //dop[0] += "1";
+            // }
+            //return page;
+            //return ReadBook(file, skip, take).ElementAt(1);
         }
 
 
