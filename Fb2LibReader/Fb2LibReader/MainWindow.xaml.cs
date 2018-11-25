@@ -29,6 +29,7 @@ namespace Fb2LibReader
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             await Interaction.OpenBook();
+            Interaction.BookToList();
         }
 
 
@@ -37,16 +38,24 @@ namespace Fb2LibReader
             if (Interaction.Book == null)
             {
                 await Interaction.OpenBook();
-                Interaction.BookToList(Interaction.Book);
+                Interaction.BookToList();
             }
 
-            
-            while (textBlock.IsLoaded)
+
+
+            foreach (var word in Interaction.ReadBook())
             {
-                textBlock.Text += Interaction.ReadBook(Interaction.Book, true);
+                textBlock.Inlines.Add(word);
             }
+            
+               //textBlock.Text += Interaction.ReadBook(Interaction.Book, true);
+            
             
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(textBlock.Inlines.Count().ToString());
+        }
     }
 }

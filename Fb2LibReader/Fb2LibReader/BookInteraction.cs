@@ -75,7 +75,7 @@ namespace Fb2LibReader
                 || textItem is TitleItem
                 || textItem is SimpleText)
             {
-                BookText.Add(textItem.ToString() + "\n");
+                BookText.Add(textItem.ToString());
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace Fb2LibReader
 
             if (textItem is DateItem)
             {
-                BookText.Add(((DateItem)textItem).DateValue.ToString() + "\n");
+                BookText.Add(((DateItem)textItem).DateValue.ToString());
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace Fb2LibReader
             {
                 foreach (var title in titleItem.TitleData)
                 {
-                    BookText.Add(title.ToString() + "\n");
+                    BookText.Add(title.ToString());
                 }
             }
         }
@@ -125,11 +125,10 @@ namespace Fb2LibReader
 
 
         //add all book's content to List
-        public void BookToList(FB2File file)
+        public void BookToList()
         {
             int sectionsCount = 0;
-            Book = file;
-
+            
             for (var i = 0; sectionsCount < Book.MainBody.Sections.Count() - 1; i++)
             {
                 if (i == (Book.MainBody.Sections[sectionsCount].Content.Count()) - 1)
@@ -144,18 +143,26 @@ namespace Fb2LibReader
 
 
         //make book to read
-        public string ReadBook(FB2File file, bool isTextBlockLoaded)
+        public string[] ReadBook()
         {
             
-            
+            BookToList();
             var listDop = BookText.Skip(Position);
+            listDop = listDop.Take(1);
             //listDop = listDop.Take(take);
             //listDop.TakeWhile(p => main.textBlock.IsLoaded);
 
+            var stringDop = "";
 
-                
-            Position++;
-            return listDop.ElementAt(Position); ;
+            //for (int i = 0; i < listDop.Count(); i++)
+            //{
+                stringDop += listDop.ElementAt(0);
+            //}
+
+            var words = stringDop.Split(' ');
+
+            //Position++;
+            return words;
             
             
         }

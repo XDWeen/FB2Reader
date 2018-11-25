@@ -9,6 +9,7 @@
     <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="399" Width="709" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" MouseLeftButtonDown="TextBlock_leftButton"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="750,176,0,0" VerticalAlignment="Top" Width="32" Click="Button_Click"/>
+        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="724,262,0,0" VerticalAlignment="Top" Width="58" Click="button1_Click"/>
 
     </Grid>
 </Window>
